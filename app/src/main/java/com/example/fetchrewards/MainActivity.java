@@ -1,13 +1,19 @@
 package com.example.fetchrewards;
 
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+
+   Layout layout;
+   View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +22,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("fetch Rewards");
         setSupportActionBar(toolbar);
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
