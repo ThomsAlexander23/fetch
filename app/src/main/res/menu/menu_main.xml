@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".MainActivity">
+
+    <item
+            android:id="@+id/action_search"
+            android:icon="@drawable/search"
+            android:iconTint="@color/purple_logo"
+            android:orderInCategory="300"
+            android:title="Search"
+            app:showAsAction="ifRoom" />
+    <item
+            android:id="@+id/action_sort"
+            android:icon="@drawable/sort"
+            android:iconTint="@color/purple_logo"
+            android:orderInCategory="200"
+            android:title="Sort"
+            app:showAsAction="ifRoom" />
+    <item
+            android:id="@+id/action_filter"
+            android:icon="@drawable/filter_list"
+            android:iconTint="@color/purple_logo"
+            android:orderInCategory="100"
+            android:title="Filter"
+            app:showAsAction="ifRoom" />
+
+</menu>
