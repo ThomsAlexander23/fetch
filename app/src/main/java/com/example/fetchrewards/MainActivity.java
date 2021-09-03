@@ -15,6 +15,7 @@ import retrofit2.Response;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         results.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
                     }
                 }
+                Collections.sort(results, new SortByListId().thenComparing(new SortByListName()));
                 ResultAdapter adapter = new ResultAdapter((Application) getApplicationContext(), results);
                 listView.setAdapter(adapter);
             }
