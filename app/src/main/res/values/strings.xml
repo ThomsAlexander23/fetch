@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">fetch Rewards</string>
     <string name="action_list">Click to see unmodified list</string>
+    <string name="results">List entries:</string>
 
 </resources>
