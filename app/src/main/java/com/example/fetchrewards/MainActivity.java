@@ -67,12 +67,16 @@ public class MainActivity extends AppCompatActivity {
                             switch (data.get(i).getListId()) {
                                 case 1:
                                     listIdOne.add(new Result(data.get(i).getId(), data.get(i).getListId(), data.get(i).getName()));
+                                    break;
                                 case 2:
                                     listIdTwo.add(new Result(data.get(i).getId(), data.get(i).getListId(), data.get(i).getName()));
+                                    break;
                                 case 3:
                                     listIdThree.add(new Result(data.get(i).getId(), data.get(i).getListId(), data.get(i).getName()));
+                                    break;
                                 case 4:
                                     listIdFour.add(new Result(data.get(i).getId(), data.get(i).getListId(), data.get(i).getName()));
+                                    break;
                             }
                         }
                 }
@@ -90,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
                 final HashMap<String, List<Result>> results = new HashMap<>();
 
                 results.put(listIdGroup.get(0), listIdOne);
-                results.put(listIdGroup.get(1), listIdOne);
-                results.put(listIdGroup.get(2), listIdOne);
-                results.put(listIdGroup.get(3), listIdOne);
+                results.put(listIdGroup.get(1), listIdTwo);
+                results.put(listIdGroup.get(2), listIdThree);
+                results.put(listIdGroup.get(3), listIdFour);
 
                 listViewAdapter = new ListViewAdapter((Application) getApplicationContext(), listIdGroup, results);
 
@@ -107,10 +111,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         boolean groupsCollapsed = false;
-        for (int i = 0; i < expandableListView.getCount(); i++){
-            if (expandableListView.isGroupExpanded(i)){
+        for (int i = 0; i < expandableListView.getCount(); i++) {
+            if (expandableListView.isGroupExpanded(i)) {
                 expandableListView.collapseGroup(i);
                 groupsCollapsed = true;
             }
