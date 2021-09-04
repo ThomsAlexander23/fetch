@@ -1,6 +1,5 @@
 package com.example.fetchrewards.Utils;
 
-import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import com.example.fetchrewards.Models.Result;
 import com.example.fetchrewards.R;
-import org.w3c.dom.Text;
+
 
 import java.util.HashMap;
 import java.util.List;

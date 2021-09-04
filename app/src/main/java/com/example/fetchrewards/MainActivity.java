@@ -3,7 +3,6 @@ package com.example.fetchrewards;
 import com.example.fetchrewards.Models.Result;
 import com.example.fetchrewards.Retrofit.RetrofitClient;
 import com.example.fetchrewards.Utils.ListViewAdapter;
-import com.example.fetchrewards.Utils.ResultAdapter;
 import com.example.fetchrewards.Utils.SortByListId;
 import com.example.fetchrewards.Utils.SortByListName;
 import android.app.Application;
@@ -26,10 +25,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ExpandableListView expandableListView;
-    ListView listView;
     ListViewAdapter listViewAdapter;
     Button retrieveModifiedList;
-    View v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
