@@ -1,5 +1,6 @@
 package com.example.fetchrewards.Utils;
 
+import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +14,13 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 import java.util.List;
 
-public class ListViewAdapter  extends BaseExpandableListAdapter {
+public class ListViewAdapter extends BaseExpandableListAdapter {
 
-    private List<Integer> itemGroups;
-    private HashMap<Integer, List<Result>> model;
+    private List<String> itemGroups;
+    private HashMap<String, List<Result>> model;
     private Context context;
 
-    public ListViewAdapter(Context context, List<Integer> itemIds, HashMap<Integer, List<Result> results) {
+    public ListViewAdapter(Context context, List<String> itemIds, HashMap<String, List<Result>> results) {
         this.context = context;
         itemGroups = itemIds;
         model = results;
@@ -32,12 +33,17 @@ public class ListViewAdapter  extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition){
-        return itemGroups.get(getGroup(groupPosition)).size();
+        return model.get(getGroup(groupPosition)).size();
     }
 
     @Override
     public Object getGroup(int groupPosition){
         return itemGroups.get(groupPosition);
+    }
+
+    @Override
+    public Object getChild(int groupPosition, int childPosition) {
+        return model.get(getGroup(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -64,12 +70,12 @@ public class ListViewAdapter  extends BaseExpandableListAdapter {
 
         TextView itemIdGroup = (TextView) convertView.findViewById(R.id.item_id_group);
 
-        itemIdGroup.setText((Integer) getGroup(groupPosition));
+        itemIdGroup.setText((String) getGroup(groupPosition));
         return convertView;
     }
 
     @Override
-    public View getCholdView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent){
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent){
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item_group, null);

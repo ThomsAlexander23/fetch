@@ -2,6 +2,7 @@ package com.example.fetchrewards;
 
 import com.example.fetchrewards.Models.Result;
 import com.example.fetchrewards.Retrofit.RetrofitClient;
+import com.example.fetchrewards.Utils.ListViewAdapter;
 import com.example.fetchrewards.Utils.ResultAdapter;
 import com.example.fetchrewards.Utils.SortByListId;
 import com.example.fetchrewards.Utils.SortByListName;
@@ -19,14 +20,16 @@ import retrofit2.Response;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
-   ListView listView;
-   Button retrieveModifiedList;
-   View v;
+    ExpandableListView expandableListView;
+    ListView listView;
+    ListViewAdapter listViewAdapter;
+    Button retrieveModifiedList;
+    View v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("fetch Rewards");
         setSupportActionBar(toolbar);
 
-        listView = findViewById(R.id.list_data);
-
+//        listView = findViewById(R.id.list_data);
+        expandableListView = (ExpandableListView) findViewById(R.id.expandable);
 
         retrieveModifiedList = (Button) findViewById(R.id.button);
         retrieveModifiedList.setOnClickListener(new View.OnClickListener() {
@@ -49,24 +52,58 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getData(){
+    private void getData() {
         Call<List<Result>> call = RetrofitClient.getInstance().getMyAPi().getRequestData();
         call.enqueue((new Callback<List<Result>>() {
             @Override
             public void onResponse(Call<List<Result>> call, Response<List<Result>> response) {
 
                 List<Result> data = response.body();
-                ArrayList<Result> results = new ArrayList<>();
+                ArrayList<Result> listIdOne = new ArrayList<>();
+                ArrayList<Result> listIdTwo = new ArrayList<>();
+                ArrayList<Result> listIdThree = new ArrayList<>();
+                ArrayList<Result> listIdFour = new ArrayList<>();
 
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).getName() != null)
-                        if (!data.get(i).getName().equals("")){
-                        results.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
-                    }
+                        if (!data.get(i).getName().equals("")) {
+                            switch (data.get(i).getItemId()) {
+                                case 1:
+                                    listIdOne.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
+                                    break;
+                                case 2:
+                                    listIdTwo.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
+                                    break;
+                                case 3:
+                                    listIdThree.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
+                                    break;
+                                case 4:
+                                    listIdFour.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
+                                    break;
+                            }
+                        }
                 }
-                Collections.sort(results, new SortByListId().thenComparing(new SortByListName()));
-                ResultAdapter adapter = new ResultAdapter((Application) getApplicationContext(), results);
-                listView.setAdapter(adapter);
+                ArrayList<String> listIdGroup = new ArrayList<>();
+                listIdGroup.add(String.valueOf(1));
+                listIdGroup.add(String.valueOf(2));
+                listIdGroup.add(String.valueOf(3));
+                listIdGroup.add(String.valueOf(4));
+
+                Collections.sort(listIdOne, new SortByListId().thenComparing(new SortByListName()));
+                Collections.sort(listIdTwo, new SortByListId().thenComparing(new SortByListName()));
+                Collections.sort(listIdThree, new SortByListId().thenComparing(new SortByListName()));
+                Collections.sort(listIdFour, new SortByListId().thenComparing(new SortByListName()));
+
+                final HashMap<String, List<Result>> results = new HashMap<>();
+
+                results.put(listIdGroup.get(0), listIdOne);
+                results.put(listIdGroup.get(1), listIdOne);
+                results.put(listIdGroup.get(2), listIdOne);
+                results.put(listIdGroup.get(3), listIdOne);
+
+                listViewAdapter = new ListViewAdapter((Application) getApplicationContext(), listIdGroup, results);
+
+                expandableListView.setAdapter(listViewAdapter);
             }
 
             @Override
@@ -78,20 +115,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             getData();
             Toast.makeText(getApplicationContext(), "potential settings menu", Toast.LENGTH_SHORT).show();
             return true;
-        }
-        else if (id == R.id.action_search) {
+        } else if (id == R.id.action_search) {
             getData();
             Toast.makeText(getApplicationContext(), "Potential Search List", Toast.LENGTH_SHORT).show();
             return true;
