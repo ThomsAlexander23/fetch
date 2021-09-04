@@ -1,5 +1,6 @@
-package com.example.fetchrewards;
+package com.example.fetchrewards.Interfaces;
 
+import com.example.fetchrewards.Models.Result;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

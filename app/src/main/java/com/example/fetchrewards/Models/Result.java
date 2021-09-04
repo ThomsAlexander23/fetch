@@ -1,9 +1,6 @@
-package com.example.fetchrewards;
+package com.example.fetchrewards.Models;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.lang.reflect.Array;
-import java.util.List;
 
 public class Result {
 
@@ -11,14 +8,14 @@ public class Result {
     public String itemName;
 
     @SerializedName("listId")
-    public int itemId;
+    public int listId;
 
     @SerializedName("id")
     public int id;
 
-    public Result(int id, int itemId, String name){
+    public Result(int id, int listId, String name){
         this.itemName = name;
-        this.itemId = itemId;
+        this.listId = listId;
         this.id = id;
     }
 
@@ -26,8 +23,8 @@ public class Result {
         return this.itemName;
     }
 
-    public int getItemId(){
-        return this.itemId;
+    public int getListId(){
+        return this.listId;
     }
 
     public int getId() {
