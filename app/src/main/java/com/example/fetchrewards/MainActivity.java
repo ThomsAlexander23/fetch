@@ -113,6 +113,20 @@ public class MainActivity extends AppCompatActivity {
         }));
     }
 
+    @Override
+    public void onBackPressed(){
+        boolean groupsCollapsed = false;
+        for (int i = 0; i < expandableListView.getCount(); i++){
+            if (expandableListView.isGroupExpanded(i)){
+                expandableListView.collapseGroup(i);
+                groupsCollapsed = true;
+            }
+        }
+        if (!groupsCollapsed) {
+            super.onBackPressed();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
