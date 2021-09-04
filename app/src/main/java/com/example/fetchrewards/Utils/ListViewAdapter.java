@@ -16,13 +16,13 @@ import java.util.List;
 public class ListViewAdapter extends BaseExpandableListAdapter {
 
     private List<String> itemGroups;
-    private HashMap<String, List<Result>> model;
+    private HashMap<String, List<Result>> results;
     private Context context;
 
-    public ListViewAdapter(Context context, List<String> itemIds, HashMap<String, List<Result>> results) {
+    public ListViewAdapter(Context context, List<String> itemIds, HashMap<String, List<Result>> data) {
         this.context = context;
         itemGroups = itemIds;
-        model = results;
+        results = data;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition){
-        return model.get(getGroup(groupPosition)).size();
+        return results.get(getGroup(groupPosition)).size();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return model.get(getGroup(groupPosition)).get(childPosition);
+        return results.get(getGroup(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -67,9 +67,9 @@ public class ListViewAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.list_group, null);
         }
 
-        TextView itemIdGroup = (TextView) convertView.findViewById(R.id.item_id_group);
+        TextView itemIds = (TextView) convertView.findViewById(R.id.item_id_group);
 
-        itemIdGroup.setText((String) getGroup(groupPosition));
+        itemIds.setText((String) getGroup(groupPosition));
         return convertView;
     }
 
@@ -79,9 +79,9 @@ public class ListViewAdapter extends BaseExpandableListAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item_group, null);
         }
-        TextView itemNameGroup = (TextView) convertView.findViewById(R.id.item_name_group);
+        TextView itemNames = (TextView) convertView.findViewById(R.id.item_name_group);
         Result result = (Result) getChild(groupPosition, childPosition);
-        itemNameGroup.setText(result.getName());
+        itemNames.setText(result.getName());
 
         return convertView;
     }

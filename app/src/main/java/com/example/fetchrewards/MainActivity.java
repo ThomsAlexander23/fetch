@@ -64,19 +64,15 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).getName() != null)
                         if (!data.get(i).getName().equals("")) {
-                            switch (data.get(i).getItemId()) {
+                            switch (data.get(i).getListId()) {
                                 case 1:
-                                    listIdOne.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
-                                    break;
+                                    listIdOne.add(new Result(data.get(i).getId(), data.get(i).getListId(), data.get(i).getName()));
                                 case 2:
-                                    listIdTwo.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
-                                    break;
+                                    listIdTwo.add(new Result(data.get(i).getId(), data.get(i).getListId(), data.get(i).getName()));
                                 case 3:
-                                    listIdThree.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
-                                    break;
+                                    listIdThree.add(new Result(data.get(i).getId(), data.get(i).getListId(), data.get(i).getName()));
                                 case 4:
-                                    listIdFour.add(new Result(data.get(i).getId(), data.get(i).getItemId(), data.get(i).getName()));
-                                    break;
+                                    listIdFour.add(new Result(data.get(i).getId(), data.get(i).getListId(), data.get(i).getName()));
                             }
                         }
                 }
