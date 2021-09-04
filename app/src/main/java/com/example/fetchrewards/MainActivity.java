@@ -3,7 +3,6 @@ package com.example.fetchrewards;
 import com.example.fetchrewards.Models.Result;
 import com.example.fetchrewards.Retrofit.RetrofitClient;
 import com.example.fetchrewards.Utils.ListViewAdapter;
-import com.example.fetchrewards.Utils.SortByListId;
 import com.example.fetchrewards.Utils.SortByListName;
 import android.app.Application;
 import android.view.Menu;
@@ -49,18 +48,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Retrieve JSON Data from URL and Display
     private void getData() {
+        // Utilize retrofit client to handle fetch of Data
         Call<List<Result>> call = RetrofitClient.getInstance().getMyAPi().getRequestData();
         call.enqueue((new Callback<List<Result>>() {
             @Override
             public void onResponse(Call<List<Result>> call, Response<List<Result>> response) {
-
+                // store data in list
                 List<Result> data = response.body();
+
+                // initialized array lists to hold items belonging to that listID
                 ArrayList<Result> listIdOne = new ArrayList<>();
                 ArrayList<Result> listIdTwo = new ArrayList<>();
                 ArrayList<Result> listIdThree = new ArrayList<>();
                 ArrayList<Result> listIdFour = new ArrayList<>();
 
+
+                // iterate over data to store in proper arrayList filtering based on ListId
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).getName() != null)
                         if (!data.get(i).getName().equals("")) {
@@ -80,19 +85,22 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                 }
+                // arrayList of unique ListIDs (hardcoded for now, ideally will be addressed through filter)
                 ArrayList<String> listIdGroup = new ArrayList<>();
                 listIdGroup.add(String.valueOf(1));
                 listIdGroup.add(String.valueOf(2));
                 listIdGroup.add(String.valueOf(3));
                 listIdGroup.add(String.valueOf(4));
 
-                Collections.sort(listIdOne, new SortByListId().thenComparing(new SortByListName()));
-                Collections.sort(listIdTwo, new SortByListId().thenComparing(new SortByListName()));
-                Collections.sort(listIdThree, new SortByListId().thenComparing(new SortByListName()));
-                Collections.sort(listIdFour, new SortByListId().thenComparing(new SortByListName()));
+                // sorting by listName accounting for numbers
+                Collections.sort(listIdOne, new SortByListName());
+                Collections.sort(listIdTwo, new SortByListName());
+                Collections.sort(listIdThree, new SortByListName());
+                Collections.sort(listIdFour, new SortByListName());
 
                 final HashMap<String, List<Result>> results = new HashMap<>();
 
+                // ArrayList added to hash map for use in custom adapter that will display expanded list view
                 results.put(listIdGroup.get(0), listIdOne);
                 results.put(listIdGroup.get(1), listIdTwo);
                 results.put(listIdGroup.get(2), listIdThree);
