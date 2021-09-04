@@ -1,6 +1,10 @@
 package com.example.fetchrewards;
 
-import android.app.Activity;
+import com.example.fetchrewards.Models.Result;
+import com.example.fetchrewards.Retrofit.RetrofitClient;
+import com.example.fetchrewards.Utils.ResultAdapter;
+import com.example.fetchrewards.Utils.SortByListId;
+import com.example.fetchrewards.Utils.SortByListName;
 import android.app.Application;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +18,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
    ListView listView;
-   Button retrieveUnmodifiedList;
+   Button retrieveModifiedList;
    View v;
 
     @Override
@@ -36,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.list_data);
 
 
-        retrieveUnmodifiedList = (Button) findViewById(R.id.button);
-        retrieveUnmodifiedList.setOnClickListener(new View.OnClickListener() {
+        retrieveModifiedList = (Button) findViewById(R.id.button);
+        retrieveModifiedList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -83,19 +86,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if (id == R.id.action_filter) {
+        if (id == R.id.action_settings) {
             getData();
-            Toast.makeText(getApplicationContext(), "Filtered List", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        else if (id == R.id.action_sort) {
-            getData();
-            Toast.makeText(getApplicationContext(), "Sorted List", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "potential settings menu", Toast.LENGTH_SHORT).show();
             return true;
         }
         else if (id == R.id.action_search) {
             getData();
-            Toast.makeText(getApplicationContext(), "List by Search Value", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Potential Search List", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

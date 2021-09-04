@@ -1,5 +1,6 @@
-package com.example.fetchrewards;
+package com.example.fetchrewards.Retrofit;
 
+import com.example.fetchrewards.Interfaces.Api;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

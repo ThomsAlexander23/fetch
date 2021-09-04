@@ -1,17 +1,15 @@
-package com.example.fetchrewards;
+package com.example.fetchrewards.Utils;
 
-import android.app.Activity;
+import com.example.fetchrewards.Models.Result;
 import android.app.Application;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import retrofit2.Callback;
+import com.example.fetchrewards.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ResultAdapter  extends ArrayAdapter<Result> {
 

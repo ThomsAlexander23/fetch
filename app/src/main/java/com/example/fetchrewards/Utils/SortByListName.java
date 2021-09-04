@@ -1,5 +1,6 @@
-package com.example.fetchrewards;
+package com.example.fetchrewards.Utils;
 
+import com.example.fetchrewards.Models.Result;
 import java.util.Comparator;
 
 public class SortByListName implements Comparator<Result> {
